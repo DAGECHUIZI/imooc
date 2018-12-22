@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./package/animate.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main {
+            width: 1152px;
+            height: 444px;
+            background-color: #615f63;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px 0 #878f97;
+        }
+
+        .left-bar {
+            width: 212px;
+            height: 444px;
+            background-color: #2b333b;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            float: left;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 12px 0 0 10px;
+        }
+
+        li {
+            line-height: 60px;
+            color: #a1a4a8;
+            font-size: 14px;
+            padding-left: 20px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+
+        span {
+            float: right;
+            padding-right: 5px;
+        }
+
+        li:hover {
+            background-color: #878f97;
+            color: white;
+        }
+
+        .photo {
+            position: relative;
+            overflow: hidden;
+            width: 940px;
+            height: 300px;
+
+        }
+        .photobox {
+            width: 940px;
+            height: 300px;
+            position: relative;
+        }
+
+        .photobox img {
+            width: 940px;
+            height: 300px;
+            border-top-right-radius: 10px;
+            float: right;
+        }
+
+        .box {
+            height: 444px;
+            width: 750px;
+            position: absolute;
+            top: 50px;
+            left: 276px;
+            display: none;
+        }
+
+        .box {
+            background-color: #ffffff;
+        }
+
+        .subbox {
+            margin: 20px 20px;
+        }
+        
+        .subbox .subtit {
+            position: relative;
+            height: 1px;
+            margin: 35px 0 23px 0;
+            background-color: rgba(77, 85, 93, 0.08);
+        }
+
+        .subbox .subtit span {
+            position: absolute;
+            top: -12px;
+            left: 0;
+            padding-right: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #F20D0D;
+            line-height: 24px;
+            background-color: #fff;
+        }
+
+        .subbox .sublist {
+            font-size: 0;
+        }
+
+        .subbox .sublist a {
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: #4D555D;
+            line-height: 22px;
+            margin-right: 24px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .bottom {
+            width: 940px;
+            height: 144px;
+            background-color: #e7e7e7;
+            border-bottom-right-radius: 10px;
+            float: right;
+        }
+
+        .bottom a {
+            width: 220px;
+            height: 128px;
+            display: block;
+            float: left;
+            font-size: 14px;
+            margin: 10px 5px;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            transition: all .3s;
+        }
+
+        .bottom a:hover {
+            top: -5px;
+        }
+
+        .bottom a img {
+            margin-top: 20px;
+        }
+
+        .bottom a .tit {
+            font-size: 14px;
+            color: #07111B;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .bottom a .desc {
+            font-size: 12px;
+            color: #93999F;
+            line-height: 16px;
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+    </style>
+    <script>
+        window.onload=function () {
+            var oUl=document.getElementById('ul1');
+            var aLi=oUl.getElementsByTagName('li');
+            var aBox=document.getElementsByClassName('box');
+            var timer=null;
+
+            for(var i=0;i<aLi.length;i++)
+            {
+                aLi[i].index=i;
+                aLi[i].onmouseover=function()
+                {
+                    for(var i=0;i<aLi.length;i++)
+                    {
+                        aBox[i].style.display='none';
+                    }
+                    aBox[this.index].style.display='block';
+                };
+                aLi[i].onmouseout=function()
+                {
+                    for(var i=0;i<aLi.length;i++)
+                    {
+                        aBox[i].style.display='none';
+                    }
+                };
+                // aBox[i].onmouseover=function () {
+                //     clearTimeout(timer);
+                //     aBox[i].style.display='block'
+                // }
+                // aBox[i].onmouseout=function () {
+                //     aBox[i].style.display='none'
+                // }
+            }
+
+            /*实现图片轮播*/
+
+            var oPhotobox=document.getElementById('photobox');
+            var timer=null;
+            clearInterval(timer);
+            function move() {
+                if (oPhotobox.offsetTop<=-1500){
+                    oPhotobox.style.top=0;
+                }else {
+                    oPhotobox.style.top=oPhotobox.offsetTop-300+'px';
+                }
+            }
+            timer=setInterval(move,2000);
+            oPhotobox.onmouseover=function () {
+                clearInterval(timer);
+            }
+            oPhotobox.onmouseout=function () {
+                timer=setInterval(move,2000);
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="left-bar">
+            <ul id="ul1">
+                <li>前沿 / 区块链 / 人工智能<span>></span></li>
+                <li>前端 / 小程序 / JS<span>></span></li>
+                <li>后端 / JAVA / Python<span>></span></li>
+                <li>移动 / Android / iOS<span>></span></li>
+                <li>云计算 / 大数据 / 容器<span>></span></li>
+                <li>运维 / 测试数 / 据库<span>></span></li>
+                <li>UI设计 / 3D动画 / 游戏<span>></span></li>
+            </ul>
+        </div>
+        <div class="photo">
+            <div class="photobox" id="photobox">
+                <img src="./img/muke1.jpg" >
+                <img src="./img/muke2.jpg" >
+                <img src="./img/muke3.jpg" >
+                <img src="./img/muke4.jpg" >
+                <img src="./img/muke5.jpg" >
+                <img src="./img/muke6.jpg" >
+                <img src="./img/muke1.jpg" >
+            </div>
+        </div>
+        <div class="bottom">
+            <a href="#">
+                <img src="./img/sun.gif" width="30">
+                <p class="tit">Web前端攻城狮</p>
+                <p class="desc">互联网时代最火爆的技术</p>
+            </a>
+            <a href="#">
+                <img src="./img/sun.gif" width="30">
+                <p class="tit">Jave攻城狮</p>
+                <p class="desc">综合就业排名第一</p>
+            </a>
+            <a href="#">
+                <img src="./img/sun.gif" width="30">
+                <p class="tit">Android攻城狮</p>
+                <p class="desc">移动设备市场份额第一</p>
+            </a>
+            <a href="#">
+                <img src="./img/sun.gif" width="30">
+                <p class="tit">PHP攻城狮</p>
+                <p class="desc">世界上最好的语音：）</p>
+            </a>
+        </div>
+    </div>
+    <div class="box" id="box1">
+        <div class="subbox">
+            <div class="subtit"><span>前沿技术</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="box2">
+        <div class="subbox">
+            <div class="subtit"><span>前端开发</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="box3">
+        <div class="subbox">
+            <div class="subtit"><span>后端开发</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="box4">
+        <div class="subbox">
+            <div class="subtit"><span>移动开发</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="box5">
+        <div class="subbox">
+            <div class="subtit"><span>算法&数学</span></div>
+            <div class="sublist">
+                <a href="">算法与数据结构</a>
+                <a href="">数学</a>
+            </div>
+        </div>
+        <div class="subbox">
+            <div class="subtit"><span>云计算&大数据</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="box6">
+        <div class="subbox">
+            <div class="subtit"><span>运维&测试</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+        <div class="subbox">
+            <div class="subtit"><span>数据库</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="box7">
+        <div class="subbox">
+            <div class="subtit"><span>UI设计&多媒体</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+        <div class="subbox">
+            <div class="subtit"><span>游戏</span></div>
+            <div class="sublist">
+                <a href="">微服务</a>
+                <a href="">区块链</a>
+                <a href="">以太坊</a>
+                <a href="">人工智能</a>
+                <a href="">机器学习</a>
+                <a href="">深度学习</a>
+                <a href="">计算机视觉</a>
+                <a href="">自然语言处理</a>
+                <a href="">数据分析&挖掘</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
